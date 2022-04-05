@@ -1,0 +1,57 @@
+# Created by Octave 6.4.0, Mon Apr 04 17:29:06 2022 GMT <unknown@DESKTOP-FLLVR4D>
+# name: beacon_telemetry
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 8
+# name: gnc_mode
+# type: scalar
+6
+
+
+# name: battery_temp
+# type: float scalar
+23
+
+
+# name: battery_voltage
+# type: float scalar
+3.3050000667572021
+
+
+# name: battery_current
+# type: float scalar
+0.41200000047683716
+
+
+# name: battery_charge
+# type: float scalar
+99
+
+
+# name: time
+# type: scalar
+725328123.25
+
+
+# name: rate
+# type: float matrix
+# rows: 3
+# columns: 1
+ 0.0010000000474974513
+ -0.0010000000474974513
+ 0.0020000000949949026
+
+
+# name: quat
+# type: float matrix
+# rows: 4
+# columns: 1
+ 0
+ 1
+ 0
+ 0
+
+
+
+

@@ -183,3 +183,17 @@ quat3 = typecast(uint32(bin2dec(num2str(reshape(message(47:50,:)',[4*8,1])'))),'
 quat4 = typecast(uint32(bin2dec(num2str(reshape(message(51:54,:)',[4*8,1])'))),'single');
 quat = [sqrt(1 - quat2^2 - quat3^2 - quat4^2); quat2; quat3; quat4]
 
+%% Package telemetry
+beacon_telemetry = struct;
+
+beacon_telemetry.gnc_mode = gnc_mode;
+beacon_telemetry.battery_temp = battery_temp;
+beacon_telemetry.battery_voltage = battery_voltage;
+beacon_telemetry.battery_current = battery_current;
+beacon_telemetry.battery_charge = battery_charge;
+beacon_telemetry.time = time;
+beacon_telemetry.rate = rate;
+beacon_telemetry.quat = quat;
+
+save('telemetry.mat','beacon_telemetry');
+
