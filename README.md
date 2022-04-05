@@ -5,7 +5,7 @@ This repository provides code and instructions for decoding SOC-i's telemetry be
 2. Audacity (https://www.audacityteam.org/download/), or an equivalent audio editing software.
 3. Octave (https://www.gnu.org/software/octave/download) or Matlab.
 # Testing
-An IQ baseband recording of a telemetry beacon from SOC-i (transmitted in our lab) called beacon.wav is included in this repository. To check the decoding software, download all the required software, download the appropriate folder based on what software you are using, make sure beacon.wav is in the path, and run the code. Then you can check that the telemetry values from the code match the values in the given data struct in each folder called telemetry.mat. 
+An IQ baseband recording of a telemetry beacon from SOC-i (transmitted in our lab) called beacon.wav is included in this repository. To check the decoding software, download all the required software, download the appropriate folder based on what software you are using, make sure beacon.wav is in the path, and run the code. Then you can check that the telemetry values from the code match the values in telemtry.mat. 
 # Decoding
 ## Trimming the wav file
 The wav file should be trimmed to only include one telemetry packet, and not much else. The packet is indicated by a 0.2 second long spike in the magnitude of the IQ data. This can be done in Audacity or in Matlab/Octave using indexing. The image below shows what a trimmed beacon looks like in Audacity: ![image](https://user-images.githubusercontent.com/77480142/161694635-51c778af-e72b-4da8-9860-8d6b158166d4.png) This saves computation time.
