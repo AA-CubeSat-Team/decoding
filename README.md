@@ -16,6 +16,6 @@ The demodulation code should automatically detect the appropriate gains to disti
 ## Decoding
 The 1's and 0's are automatically decoded and the telemetry values are saved in a struct called telemetry.mat. The decoding process includes de-interleaving, and converting bytes into single and double precision floats and integers. More information about this can be found at aact.space. 
 ## Submitting Data
-Please email this data to aact@uw.edu, with your latitude, longitude, and altitude. We really appreciate your help in getting extra data from SOC-i!
+Please email the telemetry data to aact@uw.edu, with your latitude, longitude, and altitude. We really appreciate your help in getting extra data from SOC-i!
 
 
