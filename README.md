@@ -7,7 +7,7 @@ This repository provides code and instructions for decoding SOC-i's telemetry be
 
 # Decoding
 ## Trimming the wav file
-The wav file should be trimmed to only include one telemetry packet, and not much else. The packet is indicated by an 0.2 second long spike in the magnitude of the IQ data. This can be done in Audacity or in Matlab/Audacity using indexing. The image below shows what a trimmed beacon looks like in Audacity: ![image](https://user-images.githubusercontent.com/77480142/161694635-51c778af-e72b-4da8-9860-8d6b158166d4.png) This saves computation time.
+The wav file should be trimmed to only include one telemetry packet, and not much else. The packet is indicated by a 0.2 second long spike in the magnitude of the IQ data. This can be done in Audacity or in Matlab/Audacity using indexing. The image below shows what a trimmed beacon looks like in Audacity: ![image](https://user-images.githubusercontent.com/77480142/161694635-51c778af-e72b-4da8-9860-8d6b158166d4.png) This saves computation time.
 ## Centering the peak frequency
 The peak frequency should be centered at 0 Hz. This might not be the case because of doppler shifting or bias in the radio. To check the center frequency, open the recording in Audacity, hit ctrl-a, then click analyze -> plot spectrum. If the peak frequency is not at 0, then change the parameter dc_f to shift the center frequency by a certain amount. Since audacity does not show the sign of the error in the center frequency, you will have to guess the sign (positive or negative). Then if the decoding does not work, try changing the sign. Freqz.m can also be used if Matlab's signal processing toolbox is available.
 ## Demodulation
