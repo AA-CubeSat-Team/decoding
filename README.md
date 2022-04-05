@@ -13,6 +13,8 @@ The peak frequency should be centered at 0 Hz. This might not be the case becaus
 ## Demodulation
 The demodulation code should automatically detect the appropriate gains to distinguish between 0's and 1's. If not, please submit an issue including the IQ recording.
 ## Decoding
-The 1's and 0's are automatically decoded and the telemetry values are saved in a struct called telemetry.mat. Please email this data to aact@uw.edu, with your latitude, longitude, and altitude. We really appreciate your help in getting extra data from SOC-i!
+The 1's and 0's are automatically decoded and the telemetry values are saved in a struct called telemetry.mat. The decoding process includes de-interleaving, and converting bytes into single and double precision floats and integers. More information about this can be found at aact.space. 
+## Submitting Data
+Please email this data to aact@uw.edu, with your latitude, longitude, and altitude. We really appreciate your help in getting extra data from SOC-i!
 
 
