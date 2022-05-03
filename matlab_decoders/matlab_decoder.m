@@ -80,21 +80,13 @@ mag_mean = mean(mag);
 
 
 for i = 1:length(ds)
-<<<<<<< HEAD
     if (mag(i) > 0.3*mag_mean)
-=======
-    if (mag(i) > 0.5*mag_mean)
->>>>>>> 9924a44e0e6adf9b4ff417df63df2c17dc862e18
         tstart = i;
         break
     end
 end
 for i = tstart:length(ds)
-<<<<<<< HEAD
     if (mag(i) < 0.3*mag_mean)
-=======
-    if (mag(i) < 0.5*mag_mean)
->>>>>>> 9924a44e0e6adf9b4ff417df63df2c17dc862e18
         tend = i;
         break
     end
