@@ -1,0 +1,44 @@
+%% Insert message here. 
+%The message can be anything but it must be converted to binary. 
+
+message = 'Hello World! This is SOCI!';
+l = length(message);
+message = dec2bin(message) - '0'; 
+% The subtraction of '0' here makes it an array of doubles instead of
+% chars, not sure why.
+
+message = [zeros(length(message),1),message]';
+message = message(:);
+% Now you should have a column vector of binary.
+
+%% Interleaving - The message must be interleaved
+blocks = ceil((l + 5)/18);
+message_int = zeros(blocks*20*8,1);
+header =  [0;0;0;0;0;0;0;1;
+          1;1;1;0;0;0;0;0;
+          0;0;0;0;1;1;1;1;
+          0;0;0;0;0;0;0;0;
+          fliplr(de2bi(uint16(l),8))'];
+
+message2 = zeros(blocks*18*8,1);
+message2(1:(5+l)*8) = [header;message];   
+message_int = zeros(blocks*20*8,1); 
+
+for i = 1:blocks
+    for k = 1:8
+        for p = 1:18
+            message_int(2+(k-1)*20 + p + (i-1)*160) = message2((p-1)*8 + k + (i-1)*144);
+        end
+    end
+end
+%% Header and Preamble
+
+preamble = repmat([1;1;0;0],[61,1]);
+header2 = [1;1;0;1;1;1;1;1];
+postpreamble = repmat([1;1;0;0],[2*(blocks*18 - 5 - l),1]);
+
+message_fin = [preamble;header2;message_int];
+% This is the message that should be sent to the xdl, and should hopefully
+% be understood by the radio, but some testing still needs to be done.
+
+

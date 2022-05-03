@@ -57,7 +57,7 @@ s = IQ_data(:,1) + i*IQ_data(:,2);
 %% Shift the Center Frequency to Zero
 % Define how far the center frequency needs to be shifted (change as
 % needed).
-dc_f = -0.298E6;
+dc_f = 0;
 
 % Shift the IQ signal
 s = s.*transpose(exp(j*2*pi*dc_f*[1:1:length(s)]/fs));
@@ -80,13 +80,13 @@ mag_mean = mean(mag);
 
 
 for i = 1:length(ds)
-    if (mag(i) > 0.8*mag_mean)
+    if (mag(i) > 0.3*mag_mean)
         tstart = i;
         break
     end
 end
 for i = tstart:length(ds)
-    if (mag(i) < 0.8*mag_mean)
+    if (mag(i) < 0.3*mag_mean)
         tend = i;
         break
     end
@@ -101,7 +101,7 @@ for i = 1:10*fs/4800
 end
 
 for i = 1:length(ang)
-    if ang(i) > 0.98*ang_max
+    if ang(i) > 0.9*ang_max
     bstart = i;
     break
     end
@@ -123,6 +123,12 @@ for i = 1:size(bits_f)
 end
 
 %% Decoding
+
+% There are 18 bytes per block, so change this number based on the length
+% of the message that was sent. If its too big, you will get an indexing
+% error, if its too small, you won't decode the entire message.
+blocks = 3;
+
 preamble = repmat([1;1;-1;-1],[20,1]);
 for i = 80:length(bits)
     if (sum(bits(i-79:i).*preamble) > 76)
@@ -130,14 +136,12 @@ for i = 80:length(bits)
     end
 end
 
-message = zeros(54,8);
+message = zeros(18*blocks,8);
 
-ds = c + [5 165 325];
-
-for i = 1:3
-    d = ds(i);
+for i = 1:blocks
+    d = c + 5 + 160*(i-1);
     
-    m = bits(d:d+160);
+    m = bits(d:d+159);
     
     for j = 1:160
         if m(j) == -1
@@ -157,8 +161,11 @@ for i = 1:3
     message(1 + (i-1)*18:18 + (i-1)*18,:) = m(1:18,:);
 end
 
-
+%% Convert to Hex
+% Use this section if you want to see what the message is in hexadecimal.
+message_hex = dec2hex(bin2dec(num2str(message)))
 %% Parse Telemetry
+% Only use this section if you are decoding a telemetry beacon.
 
 gnc_mode = bin2dec(num2str(message(6,:)))
 
@@ -184,6 +191,8 @@ quat4 = typecast(uint32(bin2dec(num2str(reshape(message(51:54,:)',[4*8,1])'))),'
 quat = [sqrt(1 - quat2^2 - quat3^2 - quat4^2); quat2; quat3; quat4]
 
 %% Package telemetry
+% Only use this section if you are decoding a telemetry beacon.
+
 beacon_telemetry = struct;
 
 beacon_telemetry.gnc_mode = gnc_mode;
